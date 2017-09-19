@@ -1,0 +1,175 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.smartera.infrastructure</groupId>
+  <artifactId>persistenceLayer</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>persistenceLayer</name>
+  <url>http://maven.apache.org</url>
+  
+    <properties>
+		<github.global.server>github</github.global.server>
+    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	<distributionManagement>
+	    <repository>
+	        <id>internal.repo</id>
+	        <name>Temporary Staging Repository</name>
+	        <url>file://${project.build.directory}/mvn-repo</url>
+	    </repository>
+	</distributionManagement>
+	
+		<repositories>
+		    <repository>
+		        <id>commons-mvn-repo</id>
+		        <url>https://raw.github.com/mostafaelganainy/socialhub-commons/mvn-repo/</url>
+		        <snapshots>
+		            <enabled>true</enabled>
+		            <updatePolicy>always</updatePolicy>
+		        </snapshots>
+		    </repository>
+	    </repositories>
+
+  <dependencies>
+  
+  		<dependency>
+			<groupId>socialhub-commons</groupId>
+			<artifactId>socialhub-commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+  
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>2.12.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20090211</version>
+		</dependency>
+		
+		<!-- remove the real commons-logging from classpath -->
+		<!-- declare as provided or exclude from spring jars -->
+		<dependency>
+		    <artifactId>commons-logging</artifactId>
+		    <groupId>commons-logging</groupId>
+		    <version>1.0</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency> 
+		  <groupId>org.slf4j</groupId>
+		  <artifactId>slf4j-jdk14</artifactId>
+		  <version>1.8.0-alpha2</version>
+		</dependency>
+
+		<!-- add slf4j interfaces to classpath -->
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.6.4</version>
+		    <scope>compile</scope>
+		</dependency>
+		
+		<!-- add commons logging to slf4j bridge to classpath --> 
+		<!-- acts as jcl but routes commons-logging calls to slf4j -->
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>jcl-over-slf4j</artifactId>
+		    <version>1.6.4</version>
+		    <scope>runtime</scope>
+		</dependency>
+		
+		<!-- add log4j binding to classpath -->
+		<!-- routes slf4j calls to log4j -->
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-log4j12</artifactId>
+		    <version>1.6.4</version>
+		    <scope>runtime</scope>
+		</dependency>
+		
+		<!-- add log4j to classpath -->
+		<!-- does the logging -->
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>1.2.16</version>
+		</dependency>
+		
+		<dependency>
+		      <groupId>junit</groupId>
+		      <artifactId>junit</artifactId>
+		      <version>4.11</version>
+		      <scope>test</scope>
+   		 </dependency>
+		
+  </dependencies>
+  
+    
+	<build>
+		<defaultGoal>install</defaultGoal>
+
+		
+		<plugins>
+			
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+		        <groupId>com.github.github</groupId>
+		        <artifactId>site-maven-plugin</artifactId>
+		        <version>0.11</version>
+		        <configuration>
+		            <!-- git commit message -->
+		            <message>Maven artifacts for ${project.version}</message>
+		            <!-- disable webpage processing -->
+		            <noJekyll>true</noJekyll>
+		            <!-- matches distribution management repository url above -->
+		            <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>
+		            <!-- remote branch name -->
+		            <branch>refs/heads/mvn-repo</branch>
+		            <!-- If you remove this then the old artifact will be removed and new 
+		             one will replace. But with the merge tag you can just release by changing 
+		                                                the version -->
+		            <merge>true</merge>
+		            <includes>
+	                	<include>**/*</include>
+	                </includes>
+	                <!-- github repo name -->
+	                <repositoryName>PersistenceLayer</repositoryName>
+	                <!-- github username -->
+	                <repositoryOwner>smartera3s</repositoryOwner>
+		        </configuration>
+		        <executions>
+					<execution>
+					    <goals>
+					         <goal>site</goal>
+					    </goals>
+					    <phase>deploy</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+  
+</project>
