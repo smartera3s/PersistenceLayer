@@ -17,12 +17,17 @@ import Query.Query;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 
+import configuration.PersistenceConfiguration;
 import exception.InvalidQueryOperationException;
 import exception.QueryException;
 
 
 public class InsertQueryUnitTesting {
+	static{
+		PersistenceConfiguration.initConnection("database.properties");
 
+	}
+	
 	private MongoDB instance 	=	MongoDB.getInstance();
 	private DB db				=	instance.getDb();
 	

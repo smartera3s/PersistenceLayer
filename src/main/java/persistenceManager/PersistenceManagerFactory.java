@@ -1,10 +1,12 @@
 package persistenceManager;
 
 
+import configuration.PersistenceConfiguration;
 import storageLayerUtils.DatabaseProperties;
 import storageLayerUtils.MongoDB;
 
 public class PersistenceManagerFactory {
+	
 	
 	public static PersistenceManager getPersistenceManagerInstance(){
 		
@@ -19,4 +21,6 @@ public class PersistenceManagerFactory {
 			return new PersistenceManagerMongoImp(MongoDB.getInstance());
 		}	
 	}
+	
+	
 }

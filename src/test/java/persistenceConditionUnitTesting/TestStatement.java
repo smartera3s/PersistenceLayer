@@ -13,6 +13,7 @@ import org.json.JSONObject;
 
 import conditionsManager.PersistenceConditionFactory;
 import conditionsManager.Statement;
+import configuration.PersistenceConfiguration;
 import exception.ConditionException;
 import exception.ConditionNotFoundException;
 import exception.MissingConditionParameterException;
@@ -31,7 +32,8 @@ public class TestStatement {
 	private ArrayList<String>	selectedNamedConditionsThatDoesnotExist;
 	@Before
 	public void setup() throws Exception{
-		
+		PersistenceConfiguration.initConnection("/home/bmostafa/jspyDatabase.properties");
+
 		statement	=	PersistenceConditionFactory.getStatement();
 		
 		condition	=	new JSONObject();

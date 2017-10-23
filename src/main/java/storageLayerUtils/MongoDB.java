@@ -3,10 +3,11 @@ package storageLayerUtils;
 import java.net.UnknownHostException;
 import java.util.UUID;
 
-
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.smartera.socialhub.ErrorHandler;
+
+import configuration.PersistenceConfiguration;
 
 public class MongoDB {
 	private static  DB db;
@@ -18,7 +19,7 @@ public class MongoDB {
 	private MongoDB (){
 		try {
 			DatabaseProperties dbProperties = DatabaseProperties.getInstance();
-			mongoClient = new MongoClient("mongodb", 27017);
+			mongoClient = new MongoClient(dbProperties.getHost(), dbProperties.getPort());
 			db = mongoClient.getDB(dbProperties.getDbName());
 
 		} catch (UnknownHostException e) {
@@ -35,8 +36,6 @@ public class MongoDB {
 	}
 	
 	
-
-
 	public static DB getDb() {
 		return db;
 	}

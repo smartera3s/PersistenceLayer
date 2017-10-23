@@ -18,7 +18,7 @@ public abstract class PersistenceManager {
 	protected Statement				_whereConditionStatement	=	null;
 	protected PersistenceCondition	_sortingConditionStatement	=	null;
 	protected int					_limit						=	0;
-	protected ArrayList<String>		_columnNames				=	null;
+	protected ArrayList<String>		_columnNames				=	new ArrayList<String>();
 	protected String				_op							=	null;
 	protected PersistenceObject		_persistenceObject			=	null;
 	
